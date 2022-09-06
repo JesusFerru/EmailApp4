@@ -46,6 +46,11 @@ namespace EmailApp4.Services
         public async Task<DataEmail> PostEmail(DataEmail request)
         //public void SendEmail(DataEmail request)
         {
+     /*       EmailTemplate template = await _db.Templates.FindAsync(new_email.IdTemplate);
+
+            new_email.Body = template.BodyTemplate;
+            new_email.Subject = template.NameTemplate; */
+
             var new_email = new DataEmail()
             {
                 IdEmail = request.IdEmail,
