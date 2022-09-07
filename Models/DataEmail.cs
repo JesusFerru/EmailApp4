@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EmailApp4.Models
 {
@@ -11,8 +12,10 @@ namespace EmailApp4.Models
         public string From { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Es obligatorio")]
         public string To { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Es obligatorio")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Es obligatorio")]
+        
         public string? Subject { get; set; }
+        
         public string? Body { get; set; }
         public DateTime Date { get; set; }
        // [ForeignKey("EmailTemplate")]

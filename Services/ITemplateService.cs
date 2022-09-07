@@ -7,5 +7,6 @@
         Task<EmailTemplate> PostTemplate(EmailTemplate body);      //Post
         Task<EmailTemplate> PutTemplate(int id, EmailTemplate body);       //Put
         Task<EmailTemplate> DeleteTemplate(int id);
+        Task<bool> Verif(int id);
     }
 }

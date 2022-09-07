@@ -1,5 +1,6 @@
 ﻿using EmailApp4.Data;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace EmailApp4.Services
 {
@@ -66,5 +67,21 @@ namespace EmailApp4.Services
             }
             else return null;
         }
+
+
+        public async Task<bool> Verif(int id)
+        {
+            var result = await _db.Templates.FirstOrDefaultAsync(x => x.IdTemplate == id);
+            if (result != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 }

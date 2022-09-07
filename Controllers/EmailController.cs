@@ -24,14 +24,19 @@ namespace EmailApp4.Controllers
 
 
         [HttpPost(Name = "Post_Email")]
-        public async Task<IActionResult> PostEmail(DataEmail request)
+        public async Task<IActionResult> PostEmail([FromHeader] int id, [FromBody] DataEmail request)
         {
             //  _emailService.SendEmail(request);
+        //    EmailTemplate template = await _templateService.GetUniqueTemplate(id);
 
+            if (await _templateService.Verif(id) == true)
+            {
+                var result = await _emailService.Post(id, request);
 
-            var result = await _emailService.PostEmail(request);
-
-            return Ok(result);
+                return Ok(result);
+            }
+            
+            return NotFound();
         }
 
 

@@ -4,6 +4,7 @@ using MimeKit.Text;
 using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
+using EmailApp4.Controllers;
 
 namespace EmailApp4.Services
 {
@@ -43,26 +44,28 @@ namespace EmailApp4.Services
 
 
 
-        public async Task<DataEmail> PostEmail(DataEmail request)
+        public async Task<DataEmail> Post(int id, DataEmail request)
         //public void SendEmail(DataEmail request)
         {
-     /*       EmailTemplate template = await _db.Templates.FindAsync(new_email.IdTemplate);
+             //  EmailTemplate template = await _db.Templates.FindAsync(id);
+            EmailTemplate template = new EmailTemplate();
+            ITemplateService tc = new TemplateService(_db);
+            template = await tc.GetUniqueTemplate(id);
 
-            new_email.Body = template.BodyTemplate;
-            new_email.Subject = template.NameTemplate; */
 
             var new_email = new DataEmail()
             {
                 IdEmail = request.IdEmail,
                 From = request.From,//_config.GetSection("EmailUsername").Value,
                 To = request.To,
-                Subject = request.Subject,
-                Body = request.Body,
+                // Subject = request.Subject,
+                Subject = template.NameTemplate,     
+                //Body = request.Body,
+                Body = template.BodyTemplate,
                 Date = request.Date, //     DateTime.Now.Date,
-              //  IdTemplate = request.IdTemplate,
+                                     //  IdTemplate = request.IdTemplate,
             };
-
-
+     
             await _db.AddAsync(new_email);
             await _db.SaveChangesAsync();
             return request;
@@ -100,5 +103,7 @@ namespace EmailApp4.Services
             }
             else return null;
         }
+
+     
     }
 }
